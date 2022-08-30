@@ -6,6 +6,7 @@ export function ApiStack({ stack }: StackContext) {
 
   const api = new Api(stack, "Api", {
     defaults: {
+      authorizer: "iam",
       function: {
         permissions: [table],
         environment: {
