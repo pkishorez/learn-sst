@@ -12,18 +12,19 @@
     "test": "sst load-config -- vitest run"
   },
   "devDependencies": {
-    "@serverless-stack/cli": "^1.9.0",
-    "@serverless-stack/resources": "^1.9.0",
+    "@serverless-stack/cli": "^1.9.4",
+    "@serverless-stack/resources": "^1.9.4",
     "@tsconfig/node16": "^1.0.3",
     "@types/uuid": "^8.3.4",
     "aws-cdk-lib": "2.32.0",
-    "typescript": "^4.7.4",
+    "typescript": "^4.8.2",
     "vitest": "^0.22.1"
   },
   "workspaces": [
     "services"
   ],
   "dependencies": {
+    "dynamodb-toolbox": "^0.4.3",
     "stripe": "^10.6.0",
     "uuid": "^8.3.2"
   }

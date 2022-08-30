@@ -1,24 +1,23 @@
 import { APIGatewayEvent } from "aws-lambda";
-import { dynamoDb, handler } from "utils";
+import { handler, Note } from "utils";
 
 export const main = handler(async (event: APIGatewayEvent) => {
   const data = JSON.parse(event.body ?? "");
 
-  const params = {
-    TableName: process.env.TABLE_NAME,
-    Key: {
+  await Note.update(
+    {
       userId: event.requestContext.authorizer?.iam.cognitoIdentity.identityId,
       noteId: event.pathParameters?.id,
+      attachment: data.attachment,
+      content: data.content,
     },
-    UpdateExpression: "SET content=:content, attachment=:attachment",
-    ExpressionAttributeValues: {
-      ":attachment": data.attachment || null,
-      ":content": data.content || null,
-    },
-    ReturnValues: "ALL_NEW",
-  };
-
-  await dynamoDb.update(params);
+    {
+      conditions: [
+        { attr: "userId", exists: true },
+        { attr: "noteId", exists: true },
+      ],
+    }
+  );
 
   return { status: true };
 });

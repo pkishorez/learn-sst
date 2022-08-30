@@ -1,2 +1,2 @@
 export { handler } from "./handler";
-export { dynamoDb } from "./dynamodb";
+export { Note } from "./notes";
