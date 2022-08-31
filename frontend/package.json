@@ -38,6 +38,9 @@
     ]
   },
   "devDependencies": {
-    "@serverless-stack/static-site-env": "^1.10.1"
+    "@serverless-stack/static-site-env": "^1.10.1",
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }

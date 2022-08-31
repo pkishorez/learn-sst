@@ -1,29 +1,30 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Auth } from "aws-amplify";
+import { AppContext } from "../lib/app-context";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate();
+
+  const { setIsAuthenticated } = useContext(AppContext);
 
   return (
-    <div style={{ maxWidth: 300 }}>
+    <div>
       <h1>Login</h1>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
           try {
             await Auth.signIn(email, password);
-            alert("LoggedIN");
+            setIsAuthenticated(true);
+            nav("/");
           } catch (e) {
             alert(e.message);
           }
         }}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "stretch",
-          rowGap: 15,
-        }}
+        className="flex flex-col items-stretch gap-y-3 mt-4"
       >
         <label>
           <div>Email</div>
@@ -54,10 +55,7 @@ export const Login = () => {
             }}
           />
         </label>
-        <button
-          type="submit"
-          style={{ width: "100%", padding: 8, marginTop: 4 }}
-        >
+        <button className="border-2 w-full p-2 mt-2" type="submit">
           Login
         </button>
       </form>
