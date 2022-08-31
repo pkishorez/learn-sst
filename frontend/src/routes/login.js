@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
 import { Auth } from "aws-amplify";
 import { AppContext } from "../lib/app-context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
+  const { state } = useLocation();
+
+  const [email, setEmail] = useState(state?.email ?? "");
   const [password, setPassword] = useState("");
+
   const nav = useNavigate();
 
   const { setIsAuthenticated } = useContext(AppContext);

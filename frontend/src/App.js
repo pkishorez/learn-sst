@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AppContext } from "./lib/app-context";
-import { Routes } from "./routes";
+import { R } from "./routes/index";
+import { BrowserRouter } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
 function App() {
@@ -30,7 +31,9 @@ function App() {
         "Loading..."
       ) : (
         <AppContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-          <Routes />
+          <BrowserRouter>
+            <R />
+          </BrowserRouter>
         </AppContext.Provider>
       )}
     </div>

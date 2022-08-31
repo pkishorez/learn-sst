@@ -1,30 +1,9 @@
 import { Auth } from "aws-amplify";
 import { useContext } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
-import { AppContext } from "../lib/app-context";
-import { Login } from "./login";
-export const Home = () => {
-  return (
-    <div>
-      <Navbar />
-      <div className="p-5 max-w-2xl mx-auto bg-white">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            element={
-              <>
-                <h1>Scratch</h1>
-                <p>A simple note taking app.</p>
-              </>
-            }
-          />
-        </Routes>
-      </div>
-    </div>
-  );
-};
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../lib/app-context";
 
-const Navbar = () => {
+export const Navbar = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
   const nav = useNavigate();
 
