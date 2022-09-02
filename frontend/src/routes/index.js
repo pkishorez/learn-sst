@@ -5,16 +5,54 @@ import { Signup } from "./signup";
 import { ConfirmUser } from "./confirm-user";
 import { NewNote } from "./notes/new";
 import { NotesList } from "./notes/list";
+import { ProtectedRoute } from "./components/protected-route";
+import { PublicRoute } from "./components/public-route";
 
 export const R = () => {
   return (
     <Home>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/confirm-user/:email" element={<ConfirmUser />} />
-        <Route path="/notes/list" element={<NotesList />} />
-        <Route path="/notes/new" element={<NewNote />} />
+        <Route
+          path="/notes/list"
+          element={
+            <ProtectedRoute>
+              <NotesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notes/new"
+          element={
+            <ProtectedRoute>
+              <NewNote />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/confirm-user/:email"
+          element={
+            <PublicRoute>
+              <ConfirmUser />
+            </PublicRoute>
+          }
+        />
+
         <Route
           path="*"
           element={
