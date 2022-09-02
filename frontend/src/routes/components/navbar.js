@@ -13,22 +13,29 @@ export const Navbar = () => {
         <Link to="/">Scratch</Link>
       </h1>
       <div style={{ flexGrow: 1 }} />
-      {isAuthenticated ? (
-        <button
-          onClick={() => {
-            Auth.signOut();
-            setIsAuthenticated(false);
-            nav("/login");
-          }}
-        >
-          Logout
-        </button>
-      ) : (
-        <div className="flex gap-x-2">
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-        </div>
-      )}
+      <div className="flex items-center divide-x-2 [&>*]:px-4">
+        {isAuthenticated ? (
+          <>
+            <Link to="/notes/new">New Note</Link>
+            <Link to="/notes/list">Notes</Link>
+
+            <button
+              onClick={() => {
+                Auth.signOut();
+                setIsAuthenticated(false);
+                nav("/login");
+              }}
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/signup">Signup</Link>
+            <Link to="/login">Login</Link>
+          </>
+        )}
+      </div>
     </div>
   );
 };
