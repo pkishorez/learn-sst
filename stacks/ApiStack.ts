@@ -1,10 +1,11 @@
 import { Api, StackContext, use } from "@serverless-stack/resources";
 import { StorageStack } from "./StorageStack";
 
-export function ApiStack({ stack }: StackContext) {
+export function ApiStack({ app, stack }: StackContext) {
   const { table } = use(StorageStack);
 
   const api = new Api(stack, "Api", {
+    customDomain: app.stage === "prod" ? "api.scratchapp.link" : undefined,
     defaults: {
       authorizer: "iam",
       function: {
@@ -26,7 +27,7 @@ export function ApiStack({ stack }: StackContext) {
   });
 
   stack.addOutputs({
-    ApiEndpoint: api.url,
+    ApiEndpoint: api.customDomainUrl ?? api.url,
   });
 
   return {

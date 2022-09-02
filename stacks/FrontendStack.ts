@@ -14,6 +14,13 @@ export function FrontendStack({ stack, app }: StackContext) {
 
   const site = new ReactStaticSite(stack, "ReactSite", {
     path: "frontend",
+    customDomain:
+      app.stage === "prod"
+        ? {
+            domainName: "scratchapp.link",
+            domainAlias: "www.scratchapp.link",
+          }
+        : undefined,
     environment: {
       REACT_APP_API_URL: api.customDomainUrl ?? api.url,
       REACT_APP_REGION: app.region,
@@ -25,7 +32,7 @@ export function FrontendStack({ stack, app }: StackContext) {
   });
 
   stack.addOutputs({
-    SiteUrl: site.url,
+    SiteUrl: site.customDomainUrl ?? site.url,
     test: "Sample output: )",
   });
 }
