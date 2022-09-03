@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
+import { onError } from "../lib/error";
 
 export const Signup = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ export const Signup = () => {
             });
             nav(`/confirm-user/${email}`);
           } catch (e) {
-            alert(e.message);
+            onError(e);
           }
         }}
         className="flex flex-col items-stretch gap-y-3 mt-4"

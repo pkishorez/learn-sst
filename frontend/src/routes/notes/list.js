@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { API } from "aws-amplify";
+import { onError } from "../../lib/error";
 
 export const NotesList = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    API.get("notes", "/notes").then(setNotes);
+    API.get("notes", "/notes").then(setNotes).catch(onError);
   }, []);
 
   return (

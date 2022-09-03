@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { API } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { s3Upload } from "../../lib/aws-lib";
+import { onError } from "../../lib/error";
 
 export const NewNote = () => {
   const [content, setContent] = useState("");
@@ -29,7 +30,7 @@ export const NewNote = () => {
             });
             nav("/notes/list");
           } catch (err) {
-            alert(err.message);
+            onError(err);
           }
         }}
         className="flex flex-col items-stretch gap-y-3 mt-4"

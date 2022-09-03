@@ -4,6 +4,10 @@ import "./index.css";
 import App from "./app";
 import { Amplify } from "aws-amplify";
 import { config } from "./config";
+import { initSentry } from "./lib/sentry";
+import ErrorBoundary from "./components/error-boundary";
+
+initSentry();
 
 Amplify.configure({
   Auth: {
@@ -32,6 +36,8 @@ Amplify.configure({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </React.StrictMode>
 );

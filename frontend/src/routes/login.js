@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Auth } from "aws-amplify";
 import { AppContext } from "../lib/app-context";
 import { useNavigate, useLocation } from "react-router-dom";
+import { onError } from "../lib/error";
 
 export const Login = () => {
   const { state } = useLocation();
@@ -24,7 +25,7 @@ export const Login = () => {
             setIsAuthenticated(true);
             nav("/");
           } catch (e) {
-            alert(e.message);
+            onError(e);
           }
         }}
         className="flex flex-col items-stretch gap-y-3 mt-4"
